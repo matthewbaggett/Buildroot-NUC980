@@ -1,0 +1,6 @@
+version: "3.3"
+services:
+  nuc980:
+    build: .
+    image: nuc980
+
