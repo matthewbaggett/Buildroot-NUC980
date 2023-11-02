@@ -24,6 +24,8 @@ jobs:
           - nuvoton_nuc980_iot_g2_defconfig
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - uses: docker/login-action@v2
         name: Login to Github Container Registry
         with:
