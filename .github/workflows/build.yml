@@ -15,7 +15,7 @@ concurrency:
 jobs:
   build:
     name: Buildroot Build
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         config:
