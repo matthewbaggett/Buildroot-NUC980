@@ -4,8 +4,8 @@ FROM ubuntu:18.04
 RUN mkdir /buildroot-docker
 WORKDIR /buildroot-docker
 
-RUN apt update && apt upgrade -y
-RUN apt install -y \
+RUN apt update -yqq && apt upgrade -yqq
+RUN apt install -yqq \
     bash \
     bc \
     build-essential \
@@ -21,6 +21,8 @@ RUN apt install -y \
     wget
 COPY . .
 ENTRYPOINT ["bash"]
+ARG CONFIG
 RUN cd buildroot && \
-    make defconfig BR2_DEFCONFIG=../nuc_configs/nuvoton_nuc980_iot_defconfig && \
+    make defconfig BR2_DEFCONFIG=../nuc_configs/$CONFIG && \
+    mkdir -p output/build/image && \
     make

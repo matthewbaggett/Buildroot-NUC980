@@ -1,6 +1,9 @@
 version: "3.3"
 services:
   nuc980:
-    build: .
+    build:
+      context: .
+      args:
+        - CONFIG=nuvoton_nuc980_iot_defconfig
     image: nuc980
 
