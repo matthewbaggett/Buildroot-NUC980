@@ -41,6 +41,7 @@ jobs:
         run: docker build -t nuc980:${{ matrix.config }} --build-arg="CONFIG=${{ matrix.config }}" --progress plain .
       - name: Extract build artifacts
         run: |
+          mkdir ./artifacts
           docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/uImage ./artifacts/uImage
           docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/rootfs.cpio ./artifacts/rootfs.cpio
           docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/rootfs.tar ./artifacts/rootfs.tar
