@@ -39,14 +39,16 @@ jobs:
       - uses: crazy-max/ghaction-github-runtime@v1 # This is required to enable gha cache layers.
       - name: Build ${{ matrix.config }}
         run: docker build -t nuc980:${{ matrix.config }} --build-arg="CONFIG=${{ matrix.config }}" --progress plain .
-      - name: Extract build artifacts
+      - name: Extract ${{ matrix.config }} build artifacts
         run: |
+          INSTANCE=`docker create nuc980:${{ matrix.config }}`
           mkdir ./artifacts
-          docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/uImage ./artifacts/uImage
-          docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/rootfs.cpio ./artifacts/rootfs.cpio
-          docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/rootfs.tar ./artifacts/rootfs.tar
-          docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/u-boot.bin ./artifacts/u-boot.bin
-          docker cp nuc980:${{ matrix.config }}:/buildroot-docker/buildroot/output/build/image/980image ./artifacts/980image
+          docker cp $INSTANCE:/buildroot-docker/buildroot/uImage                      ./artifacts/uImage
+          docker cp $INSTANCE:/buildroot-docker/buildroot/rootfs.cpio                 ./artifacts/rootfs.cpio
+          docker cp $INSTANCE:/buildroot-docker/buildroot/rootfs.tar                  ./artifacts/rootfs.tar
+          docker cp $INSTANCE:/buildroot-docker/buildroot/u-boot.bin                  ./artifacts/u-boot.bin
+          docker cp $INSTANCE:/buildroot-docker/buildroot/output/build/image/980image ./artifacts/980image
+          docker rm $INSTANCE
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.config }}
