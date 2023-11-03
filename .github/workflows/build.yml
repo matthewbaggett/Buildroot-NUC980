@@ -22,6 +22,7 @@ jobs:
           - nuvoton_nuc980_defconfig
           - nuvoton_nuc980_iot_defconfig
           - nuvoton_nuc980_iot_g2_defconfig
+      fail-fast: false
     steps:
       - uses: actions/checkout@v3
         with:
