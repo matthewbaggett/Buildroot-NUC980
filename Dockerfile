@@ -32,3 +32,4 @@ RUN ln -s /bin/arm-linux-gnueabi-objcopy /bin/arm-linux-objcopy
 RUN ln -s /bin/arm-linux-gnueabi-readelf /bin/arm-linux-readelf
 RUN ln -s /bin/arm-linux-gnueabi-objdump /bin/arm-linux-objdump
 RUN ln -s /bin/arm-linux-gnueabi-nm /bin/arm-linux-nm
+ENV IN_DOCKER=0

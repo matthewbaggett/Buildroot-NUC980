@@ -7,5 +7,5 @@ docker tag buildroot buildroot:latest
 
 # Run container abd attach current directory
 docker run \
-    -v /home/arteom/Documents/Buildroot-NUC980:/buildroot-docker/MountedBuildroot \
+    -v ~/Documents/Buildroot-NUC980:/buildroot-docker/MountedBuildroot \
     -it buildroot:latest bash
